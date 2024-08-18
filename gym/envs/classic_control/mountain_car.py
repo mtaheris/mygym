@@ -272,7 +272,12 @@ class MountainCarEnv(gym.Env):
     def get_keys_to_action(self):
         # Control with left and right arrow keys.
         return {(): 1, (276,): 0, (275,): 2, (275, 276): 1}
+    def get_state(self):
+        return self.state
 
+    def set-state(slef,new_state):
+        self.state=new_state
+    
     def close(self):
         if self.screen is not None:
             import pygame
