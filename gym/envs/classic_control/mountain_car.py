@@ -100,14 +100,14 @@ class MountainCarEnv(gym.Env):
         "render_fps": 30,
     }
 
-    self.state=[0,0]
+    
     def __init__(self, render_mode: Optional[str] = None, goal_velocity=0):
         self.min_position = -1.2
         self.max_position = 0.6
         self.max_speed = 0.07
         self.goal_position = 0.5
         self.goal_velocity = goal_velocity
-
+        self.state=[0,0]
         self.force = 0.001
         self.gravity = 0.0025
 
