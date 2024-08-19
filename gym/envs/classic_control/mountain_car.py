@@ -142,6 +142,10 @@ class MountainCarEnv(gym.Env):
             position >= self.goal_position and velocity >= self.goal_velocity
         )
         reward = -1.0
+        if (position<=-1.2):
+            terminated= True
+            reward=-10.0
+        
 
         self.state = (position, velocity)
         if self.render_mode == "human":
