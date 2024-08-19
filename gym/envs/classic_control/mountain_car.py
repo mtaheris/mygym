@@ -275,7 +275,7 @@ class MountainCarEnv(gym.Env):
     def get_state(self):
         return self.state
 
-    def set-state(slef,new_state):
+    def set-state(self,new_state):
         self.state=new_state
     
     def close(self):
