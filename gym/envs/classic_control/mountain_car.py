@@ -127,24 +127,7 @@ class MountainCarEnv(gym.Env):
 
 
 
-    # کد برای محاسبه پاداش مبتنی بر موقعیت و سرعت
-    def calculate_shaped_reward(self, position, velocity):
-        if position >= 0.5:  # هدف رسیده است
-            reward = 100
-        elif position <= -1.2:  # موقعیت ناامن
-            reward = -100
-        else:
-            # پاداش مبتنی بر پیشرفت به سمت هدف
-            reward = -1 + 100 * (position / 0.5)
-        
-            # جریمه برای حرکت به سمت ناامن
-            #if velocity < 0:
-            #    reward -= 0.5
     
-        # نرمال‌سازی پاداش
-        normalized_reward = reward / 100.0
-    
-        return normalized_reward
 
     def step(self, action: int):
         assert self.action_space.contains(
@@ -162,7 +145,19 @@ class MountainCarEnv(gym.Env):
         terminated = bool(
             position >= self.goal_position and velocity >= self.goal_velocity
         )
-        
+
+        if position>=0.5:
+            reward=0
+            terminated=True
+        elif position<=-1.2:
+            reward=-200
+            terminated=True
+        else:
+            reward=-1
+
+        reward=reward/200.0
+
+        """
         reward = -1.0
         
         if terminated:
@@ -172,7 +167,7 @@ class MountainCarEnv(gym.Env):
         if (position<=-1.2):
             terminated= True
             reward=-1000.0
-
+"""
         #reward=self.calculate_shaped_reward(position,velocity)
         
         self.state = (position, velocity)
