@@ -139,7 +139,7 @@ class MountainCarEnv(gym.Env):
         
             # جریمه برای حرکت به سمت ناامن
             if velocity < 0:
-                reward -= 5
+                reward -= 0.5
     
         # نرمال‌سازی پاداش
         normalized_reward = reward / 100.0
