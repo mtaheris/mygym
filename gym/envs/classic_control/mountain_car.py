@@ -173,7 +173,7 @@ class MountainCarEnv(gym.Env):
             terminated= True
             #reward=-100.0
 
-        rewrad=self.calculate_shaped_reward(position,velocity)
+        reward=self.calculate_shaped_reward(position,velocity)
         
         self.state = (position, velocity)
         if self.render_mode == "human":
