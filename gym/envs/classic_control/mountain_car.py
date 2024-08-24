@@ -145,7 +145,7 @@ class MountainCarEnv(gym.Env):
         reward = -1.0
         
         if terminated:
-            if position>=0
+            if position>=0:
             reward=position
             
         if (position<=-1.2):
