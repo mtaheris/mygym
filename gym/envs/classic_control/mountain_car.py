@@ -163,15 +163,15 @@ class MountainCarEnv(gym.Env):
             position >= self.goal_position and velocity >= self.goal_velocity
         )
         
-        #reward = -1.0
+        reward = -1.0
         
-        #if terminated:
-        #    if position>=0:
-        #       reward=position
+        if terminated:
+            if position>=0:
+               reward=position
             
         if (position<=-1.2):
             terminated= True
-            #reward=-100.0
+            reward=-1000.0
 
         reward=self.calculate_shaped_reward(position,velocity)
         
