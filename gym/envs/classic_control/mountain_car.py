@@ -155,7 +155,7 @@ class MountainCarEnv(gym.Env):
         else:
             reward=-1
 
-        reward=reward/200.0
+        #reward=reward/200.0
 
         """
         reward = -1.0
