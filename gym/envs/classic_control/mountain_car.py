@@ -130,7 +130,7 @@ class MountainCarEnv(gym.Env):
     # کد برای محاسبه پاداش مبتنی بر موقعیت و سرعت
     def calculate_shaped_reward(self, position, velocity):
         if position >= 0.5:  # هدف رسیده است
-            reward = 0
+            reward = 100
         elif position <= -1.2:  # موقعیت ناامن
             reward = -100
         else:
