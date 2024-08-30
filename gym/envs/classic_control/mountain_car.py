@@ -135,6 +135,7 @@ class MountainCarEnv(gym.Env):
         ), f"{action!r} ({type(action)}) invalid"
 
         position, velocity = self.state
+        pre_position, pre_velocity=self.state
         velocity += (action - 1) * self.force + math.cos(3 * position) * (-self.gravity)
         velocity = np.clip(velocity, -self.max_speed, self.max_speed)
         position += velocity
@@ -147,13 +148,16 @@ class MountainCarEnv(gym.Env):
         )
 
         if position>=0.5:
-            reward=0
+            reward=100
             terminated=True
         elif position<=-1.2:
             reward=-100
             terminated=True
         else:
             reward=-1
+
+        if position>pre_position:
+            reward+=0.1*(position-pre_position)
 
         #reward=reward/200.0
 
