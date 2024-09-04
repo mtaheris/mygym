@@ -161,13 +161,13 @@ class MountainCarEnv(gym.Env):
         modified_reward -= 0.5 # Subtract 0.5 to adjust the base reward (to limit useless steps).
         
         # (3) Check if the car has surpassed a threshold of the path and is closer to the goal
-        if current_position > 0.98:
+        if current_position > 0.45:
             modified_reward += 20  # Add a bonus reward (Reached the goal)
-        elif current_position > 0.92: 
+        elif current_position > 0.4: 
             modified_reward += 10 # So close to the goal
-        elif current_position > 0.82:
+        elif current_position > 0.3:
             modified_reward += 6 # car is closer to the goal
-        elif current_position > 0.65:
+        elif current_position > 0.2:
             modified_reward += 1 - np.exp(-2 * current_position) # car is getting close. Thus, giving reward based on the position and the further it reached
             
         
