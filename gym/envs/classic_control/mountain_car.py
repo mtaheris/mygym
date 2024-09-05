@@ -153,9 +153,9 @@ class MountainCarEnv(gym.Env):
         current_velocity = np.interp(current_velocity, np.array([0, 1]), np.array([-0.5, 0.5]))
         
         # (1) Calculate the modified reward based on the current position and velocity of the car.
-        degree = current_position * 360
-        degree2radian = np.deg2rad(degree)
-        modified_reward =  0.2 * (np.cos(degree2radian) + 2 * np.abs(current_velocity))
+        #degree = current_position * 360
+        #degree2radian = np.deg2rad(degree)
+        modified_reward = 2 * np.abs(current_velocity)) # 0.2 * (np.cos(degree2radian) + 
         
         # (2) Step limitation
         modified_reward -= 0.5 # Subtract 0.5 to adjust the base reward (to limit useless steps).
@@ -174,7 +174,7 @@ class MountainCarEnv(gym.Env):
         # (4) Check if the car is coming down with velocity from left and goes with full velocity to right
         initial_position = -0.43842572 # Normalized value of initial position of the car which is extracted manually
         
-        if current_velocity > 0.3 and current_position > initial_position + 0.1:
+        if current_velocity > 0.03 and current_position > initial_position + 0.1:
             modified_reward += 1 + 2 * current_position  # Add a bonus reward for this desired behavior
         #########################################################################
         reward=modified_reward
