@@ -155,7 +155,7 @@ class MountainCarEnv(gym.Env):
         # (1) Calculate the modified reward based on the current position and velocity of the car.
         #degree = current_position * 360
         #degree2radian = np.deg2rad(degree)
-        modified_reward = 2 * np.abs(current_velocity)) # 0.2 * (np.cos(degree2radian) + 
+        modified_reward = 2 * np.abs(current_velocity) # 0.2 * (np.cos(degree2radian) + 
         
         # (2) Step limitation
         modified_reward -= 0.5 # Subtract 0.5 to adjust the base reward (to limit useless steps).
