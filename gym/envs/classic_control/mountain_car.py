@@ -147,6 +147,7 @@ class MountainCarEnv(gym.Env):
             position >= self.goal_position and velocity >= self.goal_velocity
         )
         #############################################################################
+        """
         current_velocity=velocity
         current_position=position
         # Interpolate the value to the desired range (because the velocity normalized value would be in range of 0 to 1 and now it would be in range of -0.5 to 0.5)
@@ -176,9 +177,10 @@ class MountainCarEnv(gym.Env):
         
         if current_velocity > 0.03 and current_position > initial_position + 0.1:
             modified_reward += 1 + 2 * current_position  # Add a bonus reward for this desired behavior
-        #########################################################################
         reward=modified_reward
-        """
+        """    
+        #########################################################################
+        
         if position>=0.5:
             reward=100
             terminated=True
@@ -187,11 +189,11 @@ class MountainCarEnv(gym.Env):
             terminated=True
         else:
             reward=-1
-        #if -1.2<position<-0.8:
-        #    reward+=2*(-position-0.8)
+        if -1.2<position<-0.8:
+            reward+=2*(-position-0.8)
         if position>=pre_position:
             reward+=0.1*(position-pre_position)
-        """
+        
 
         
         self.state = (position, velocity)
