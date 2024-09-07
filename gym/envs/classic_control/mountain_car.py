@@ -147,40 +147,18 @@ class MountainCarEnv(gym.Env):
             position >= self.goal_position and velocity >= self.goal_velocity
         )
         #############################################################################
-        """
-        current_velocity=velocity
-        current_position=position
-        # Interpolate the value to the desired range (because the velocity normalized value would be in range of 0 to 1 and now it would be in range of -0.5 to 0.5)
-        current_velocity = np.interp(current_velocity, np.array([0, 1]), np.array([-0.5, 0.5]))
-        
-        # (1) Calculate the modified reward based on the current position and velocity of the car.
-        #degree = current_position * 360
-        #degree2radian = np.deg2rad(degree)
-        modified_reward = 2 * np.abs(current_velocity) # 0.2 * (np.cos(degree2radian) + 
-        
-        # (2) Step limitation
-        modified_reward -= 0.5 # Subtract 0.5 to adjust the base reward (to limit useless steps).
-        
-        # (3) Check if the car has surpassed a threshold of the path and is closer to the goal
-        if current_position > 0.45:
-            modified_reward += 20  # Add a bonus reward (Reached the goal)
-        elif current_position > 0.4: 
-            modified_reward += 10 # So close to the goal
-        elif current_position > 0.3:
-            modified_reward += 6 # car is closer to the goal
-        elif current_position > 0.2:
-            modified_reward += 1 - np.exp(-2 * current_position) # car is getting close. Thus, giving reward based on the position and the further it reached
-            
-        
-        # (4) Check if the car is coming down with velocity from left and goes with full velocity to right
-        initial_position = -0.43842572 # Normalized value of initial position of the car which is extracted manually
-        
-        if current_velocity > 0.03 and current_position > initial_position + 0.1:
-            modified_reward += 1 + 2 * current_position  # Add a bonus reward for this desired behavior
-        reward=modified_reward
-        """    
+        reward=0
+        if position<0:
+            reward+=(0.1* abs( position))+(2* abs(velocity))
+        elif position>0:
+            reward+=(5*position)+ (10* abs(velocity))
+        reward+=-1
+        if  position>=0.5:
+            reward=100
+        if position<=-1.2:
+            reward=-200
         #########################################################################
-        
+        """
         if position>=0.5:
             reward=100
             terminated=True
@@ -193,7 +171,7 @@ class MountainCarEnv(gym.Env):
             reward+=2*(-position-0.8)
         if position>=pre_position:
             reward+=0.1*(position-pre_position)
-        
+        """
 
         
         self.state = (position, velocity)
