@@ -303,6 +303,14 @@ class CartPoleEnv(gym.Env[np.ndarray, Union[int, np.ndarray]]):
                 np.array(pygame.surfarray.pixels3d(self.screen)), axes=(1, 0, 2)
             )
 
+    def get_state(self):
+        return np.array(self.state, dtype=np.float32), {}
+
+    
+    def set_state(self,desired_state):
+        self.state=np.array(desired_state,dtype=np.float32)
+
+    
     def close(self):
         if self.screen is not None:
             import pygame
